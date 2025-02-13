@@ -1,27 +1,50 @@
-import { useState } from 'react'
-import useStore from '../store/useStore'
+import { useState } from 'react';
 
-export default function AddTaskForm() {
-  const [task, setTask] = useState('')
-  const addTask = useStore((state) => state.addTask)
+export default function AddTaskForm({ onAddTask }) {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (task.trim()) {
-      addTask({ id: Date.now(), title: task, completed: false })
-      setTask('')
-    }
-  }
+  const [startDate, setStartDate] = useState(new Date());
+const [endDate, setEndDate] = useState(new Date(Date.now() + 3600000));
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const task = {
+    title,
+    description,
+    date: startDate,
+    start: startDate,
+    end: endDate
+  };
+  onAddTask(task);
+};
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
-      <input
-        type="text"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="Dodaj nowe zadanie"
-        className="w-full p-2 border rounded"
-      />
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Tytuł</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Opis</label>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows="3"
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        ></textarea>
+      </div>
+      <div>
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+          Dodaj zadanie
+        </button>
+      </div>
     </form>
-  )
+  );
 }

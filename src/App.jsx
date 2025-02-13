@@ -1,45 +1,22 @@
-import { useState } from 'react'
-import useStore from './store/useStore'
-import Dashboard from './pages/Dashboard'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
+import Navbar from './components/Navbar';
+
 function App() {
-  const { tasks, addTask } = useStore()
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const calendarEvents = tasks.map(task => ({
-    ...task,          // Rozłóż najpierw wszystkie właściwości zadania
-    start: new Date(task.start), // Nadpisz start Date
-    end: new Date(task.end),     // Nadpisz end Date
-    allDay: false     // Dodaj allDay
-  }))
-
-  const handleAddTask = (task) => {
-    addTask(task)
-  }
-  
-
   return (
-    <Dashboard />
-    /*<div className="container mx-auto px-4">
-      <header className="flex justify-between items-center py-4">
-        <h1 className="text-3xl font-bold">TaskFlow</h1>
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-        >
-          + Nowe Zadanie
-        </button>
-      </header>
-      
-      <Calendar events={calendarEvents} />
-      
-      <AddTaskModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleAddTask}
-      />
-    </div>
-    */
-  )
+    <BrowserRouter>
+      <div className="flex">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
