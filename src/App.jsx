@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import Calendar from './components/Calendar'
-import AddTaskModal from './components/AddTaskModal'
 import useStore from './store/useStore'
-
+import Dashboard from './pages/Dashboard'
 function App() {
   const { tasks, addTask } = useStore()
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -20,7 +18,8 @@ function App() {
   
 
   return (
-    <div className="container mx-auto px-4">
+    <Dashboard />
+    /*<div className="container mx-auto px-4">
       <header className="flex justify-between items-center py-4">
         <h1 className="text-3xl font-bold">TaskFlow</h1>
         <button 
@@ -39,7 +38,7 @@ function App() {
         onSubmit={handleAddTask}
       />
     </div>
-    
+    */
   )
 }
 
