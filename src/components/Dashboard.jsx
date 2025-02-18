@@ -120,7 +120,7 @@ const Dashboard = () => {
                 />
                 <button
                   onClick={() => createCalendarEvent()}
-                  className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600"
+                  className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 mt-4"
                 >
                   Add to Google Calendar
                 </button>
