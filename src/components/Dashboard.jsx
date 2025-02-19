@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
@@ -26,13 +26,31 @@ const Dashboard = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   const { isLoading } = useSessionContext();
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    if (savedTasks) {
+      const parsedTasks = JSON.parse(savedTasks);
+      return parsedTasks.map((task) => ({
+        ...task,
+        start: new Date(task.start), // Konwersja stringa na Date
+        end: new Date(task.end),
+      }));
+    } else {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = () => {
     const newTask = {
       id: Date.now(),
       eventName,
       eventDescription,
+      start: start.toISOString(),
+      end: end.toISOString(),
     };
     setTasks([...tasks, newTask]);
   };
@@ -133,7 +151,7 @@ const Dashboard = () => {
                 end={end}
               />
             </div>
-            <Chart />
+            <Chart tasks={tasks} />
           </div>
         ) : (
           <HomePage />

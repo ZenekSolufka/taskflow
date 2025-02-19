@@ -38,7 +38,7 @@ const AddTask = ({
         </div>
         <div>
           <label className="block text-sm font-medium mb-1">Description</label>
-          <textarea
+          <input
             value={eventDescription}
             onChange={(e) => setEventDescription(e.target.value)}
             className="w-full p-2 border rounded-lg"

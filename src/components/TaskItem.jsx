@@ -1,7 +1,6 @@
 import { format } from "date-fns";
 
 const TaskItem = ({ task, removeTask, start, end }) => {
-  console.log(task.start);
   return (
     <div className="task-item flex items-start justify-between border-b-1 mb-4 mr-4">
       <div className="flex flex-col pb-4">

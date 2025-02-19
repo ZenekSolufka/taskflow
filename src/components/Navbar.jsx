@@ -23,14 +23,12 @@ const Navbar = ({ session, supabase }) => {
         <h1 className="text-xl font-bold">TaskFlow</h1>
         {session ? (
           <div className="flex items-center space-x-4">
-            <img
-              src={session.user.user_metadata.avatar_url}
-              alt="Profile"
-              className="w-8 h-8 rounded-full"
-            />
+            <p className="border-b-2">
+              Hello {session.user.user_metadata.name}
+            </p>
             <button
               onClick={() => signOut()}
-              className="text-gray-600 hover:text-gray-800"
+              className="text-white px-3 pt-1 pb-2 rounded-[8px] bg-blue-500 hover:text-gray-800"
             >
               Sign Out
             </button>
