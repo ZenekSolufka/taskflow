@@ -18,9 +18,12 @@ const Navbar = ({ session, supabase }) => {
   }
 
   return (
-    <nav className="bg-white shadow-sm">
+    <nav className="bg-[#1b1b1b] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold">TaskFlow</h1>
+        <div className="flex flex-row justify-center items-center gap-2">
+          <img className="w-6 h-6" src="../../assets/logoicon.png" alt="" />
+          <h1 className="text-xl font-bold text-gray-100">TaskFlow</h1>
+        </div>
         {session ? (
           <div className="flex items-center space-x-4">
             <p className="border-b-2">
@@ -28,7 +31,7 @@ const Navbar = ({ session, supabase }) => {
             </p>
             <button
               onClick={() => signOut()}
-              className="text-white px-3 pt-1 pb-2 rounded-[8px] bg-blue-500 hover:text-gray-800"
+              className="text-white px-3 pt-1 pb-2 rounded-[8px] bg-yellow-400 hover:bg-yellow-500"
             >
               Sign Out
             </button>

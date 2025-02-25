@@ -78,8 +78,15 @@ const Dashboard = () => {
       </div>
     );
 
-  async function createCalendarEvent() {
+  const createCalendarEvent = async (e) => {
+    e.preventDefault();
+    if (!eventName.trim() && !eventDescription.trim()) return;
+    addTask(eventName, eventDescription);
+    setEventName("");
+    setEventDescription("");
+
     console.log("creating event");
+
     const event = {
       summary: eventName,
       description: eventDescription,
@@ -109,7 +116,7 @@ const Dashboard = () => {
         console.log(data);
         alert("Event create, check your google Calendar!");
       });
-  }
+  };
 
   console.log(session);
 
@@ -121,8 +128,10 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column */}
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-lg font-semibold mb-4">Create New Task</h2>
+              <div className="bg-[#131313] p-6 rounded-lg shadow-sm">
+                <h2 className="text-lg font-semibold mb-4 text-gray-100">
+                  Create New Task
+                </h2>
                 <AddTask
                   eventName={eventName}
                   setEventName={setEventName}
@@ -137,8 +146,8 @@ const Dashboard = () => {
                   removeTask={removeTask}
                 />
                 <button
-                  onClick={() => createCalendarEvent()}
-                  className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 mt-4"
+                  onClick={createCalendarEvent}
+                  className="w-full bg-yellow-400 text-white py-2 rounded-lg hover:bg-yellow-500 mt-4"
                 >
                   Add to Google Calendar
                 </button>

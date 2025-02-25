@@ -33,18 +33,64 @@ const Chart = ({ tasks }) => {
     return counts;
   };
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: "#ffffff", // Kolor tekstu legendy
+          font: {
+            size: 14,
+            weight: "bold",
+          },
+        },
+      },
+      tooltip: {
+        titleColor: "#ffcc00", // Kolor tytułu tooltipa
+        bodyColor: "#ffffff", // Kolor tekstu w tooltipie
+        backgroundColor: "rgba(0, 0, 0, 0.7)", // Tło tooltipa
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#ffffff", // Kolor etykiet na osi X
+          font: {
+            size: 12,
+          },
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)", // Kolor linii siatki (X)
+        },
+      },
+      y: {
+        ticks: {
+          stepSize: 1,
+          color: "#ffffff", // Kolor etykiet na osi Y
+          font: {
+            size: 12,
+          },
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)", // Kolor linii siatki (Y)
+        },
+      },
+    },
+  };
+
   const chartData = {
     labels: Object.keys(taskCountByDate(tasks)),
+
     datasets: [
       {
         label: "Liczba zadań",
         data: Object.values(taskCountByDate(tasks)),
-        borderColor: "#3B82F6", // Kolor linii
-        backgroundColor: "rgba(59, 130, 246, 0.2)",
+        borderColor: "#baa100", // Kolor linii
+        backgroundColor: "oklch(0.852 0.199 91.936)",
         tension: 0.3, // Kolor wypełnienia pod linią
         borderWidth: 2, // Grubość linii
         pointRadius: 3, // Rozmiar punktów
-        pointBackgroundColor: "#3B82F6", // Kolor punktów
+        pointBackgroundColor: "oklch(0.852 0.199 91.936)", // Kolor punktów
         fill: true, // Wypełnienie pod linią
       },
     ],
@@ -54,9 +100,11 @@ const Chart = ({ tasks }) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Wykres zadań</h2>
-        <Line data={chartData} />
+      <div className="bg-[#131313] p-6 rounded-lg shadow-sm">
+        <h2 className="text-lg font-semibold mb-4 text-gray-100">
+          Wykres zadań
+        </h2>
+        <Line data={chartData} options={options} />
       </div>
     </div>
   );
