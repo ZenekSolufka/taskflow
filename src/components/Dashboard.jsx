@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-import Navbar from "./Navbar";
+import "../custom-datepicker.css";
+
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import Chart from "./Chart";
 import HomePage from "./HomePage";
-import {
-  useSession,
-  useSessionContext,
-  useSupabaseClient,
-} from "@supabase/auth-helpers-react";
+import CalendarView from "./CalendarView";
+import { useSessionContext } from "@supabase/auth-helpers-react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,13 +16,12 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement);
 
-const Dashboard = () => {
+const Dashboard = ({ session }) => {
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
-  const session = useSession();
-  const supabase = useSupabaseClient();
+
   const { isLoading } = useSessionContext();
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -117,18 +114,17 @@ const Dashboard = () => {
         alert("Event create, check your google Calendar!");
       });
   };
-
   console.log(session);
+  console.log("dane tasków", tasks);
 
   return (
-    <>
-      <Navbar session={session} supabase={supabase} />
+    <div className="flex items-center justify-center h-[100vh]">
       <main className="max-w-7xl mx-auto px-4 py-8">
         {session ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-[#131313] p-6 rounded-lg shadow-sm">
+            <div className="lg:col-span-2 space-y-15">
+              <div className="bg-[#393E46] p-6 rounded-lg shadow-sm">
                 <h2 className="text-lg font-semibold mb-4 text-gray-100">
                   Create New Task
                 </h2>
@@ -147,7 +143,7 @@ const Dashboard = () => {
                 />
                 <button
                   onClick={createCalendarEvent}
-                  className="w-full bg-yellow-400 text-white py-2 rounded-lg hover:bg-yellow-500 mt-4"
+                  className="w-full bg-[#00ADB5] text-white py-2 rounded-lg mt-4"
                 >
                   Add to Google Calendar
                 </button>
@@ -160,13 +156,17 @@ const Dashboard = () => {
                 end={end}
               />
             </div>
-            <Chart tasks={tasks} />
+            {/* Right Column */}
+            <div className="flex flex-col justify-between">
+              <Chart tasks={tasks} />
+              <CalendarView tasks={tasks} />
+            </div>
           </div>
         ) : (
           <HomePage />
         )}
       </main>
-    </>
+    </div>
   );
 };
 

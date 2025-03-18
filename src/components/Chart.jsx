@@ -85,12 +85,12 @@ const Chart = ({ tasks }) => {
       {
         label: "Liczba zadań",
         data: Object.values(taskCountByDate(tasks)),
-        borderColor: "#baa100", // Kolor linii
-        backgroundColor: "oklch(0.852 0.199 91.936)",
+        borderColor: "#00ADB5", // Kolor linii
+        backgroundColor: "#00ADB5",
         tension: 0.3, // Kolor wypełnienia pod linią
         borderWidth: 2, // Grubość linii
         pointRadius: 3, // Rozmiar punktów
-        pointBackgroundColor: "oklch(0.852 0.199 91.936)", // Kolor punktów
+        pointBackgroundColor: "#00ADB5", // Kolor punktów
         fill: true, // Wypełnienie pod linią
       },
     ],
@@ -100,10 +100,7 @@ const Chart = ({ tasks }) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-[#131313] p-6 rounded-lg shadow-sm">
-        <h2 className="text-lg font-semibold mb-4 text-gray-100">
-          Wykres zadań
-        </h2>
+      <div className="bg-[#393E46] p-6 rounded-lg shadow-sm">
         <Line data={chartData} options={options} />
       </div>
     </div>

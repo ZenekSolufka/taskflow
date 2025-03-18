@@ -1,0 +1,26 @@
+.react-datepicker__day-name,
+.react-datepicker-time__header,
+.react-datepicker__current-month,
+.react-datepicker__header,
+.react-datepicker,
+.react-datepicker__day,
+.react-datepicker__time-list-item,
+.react-datepicker__time-containers {
+  color: white !important;
+  background-color: #1b1b1b;
+}
+
+.react-datepicker__time-list-item:hover,
+.react-datepicker__day:hover {
+  background-color: #ffcc00 !important;
+}
+
+.react-datepicker__day--selected {
+  background-color: #ffcc00 !important;
+  color: white !important;
+}
+
+.react-datepicker__day--outside-month {
+  background-color: black;
+  border-radius: 5px;
+}

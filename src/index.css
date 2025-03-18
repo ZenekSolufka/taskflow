@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+:root {
+  --color-primary: #222831;
+  --color-secondary: #393e46;
+  --color-accent: #00adb5;
+  --color-light: #eeeeee;
+}
+
 @layer utilities {
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
@@ -14,4 +21,78 @@
     background-color: #e5e7eb;
     border-radius: 4px;
   }
+}
+
+/*
+
+.rbc-month-view {
+  color: white;
+  background-color: #1b1b1b;
+}
+
+.rbc-off-range-bg {
+  background-color: red !important; 
+}
+
+.rbc-off-range .rbc-day-number {
+  color: #888888; 
+}
+
+.rbc-off-range {
+  background-color: red !important; 
+}
+
+.rbc-row-bg {
+  display: none !important;
+}
+
+.rbc-today {
+  background-color: #ffd000 !important;
+}
+
+.rbc-event {
+  background-color: #8d7300 !important;
+  color: white;
+}
+
+.rbc-month-view,
+.rbc-header {
+  border: none !important;
+}
+
+.rbc-day-bg {
+  -webkit-box-flex: 0 !important;
+  -ms-flex: 0 !important;
+  flex: 0 !important;
+}
+
+.rbc-month-row + .rbc-month-row {
+  border-top: none !important;
+  margin-top: 1rem !important;
+}
+
+*/
+
+.rbc-off-range-bg,
+.rbc-today {
+  background-color: #00adb5 !important;
+  color: #fff !important;
+}
+.rbc-row {
+  color: #fff !important;
+}
+.rbc-button-link {
+  color: #fff !important;
+}
+
+.rbc-event {
+  background-color: #222831 !important;
+}
+
+.rbc-month-row {
+  max-height: 55px !important;
+}
+
+.rbc-calendar {
+  height: 410px !important;
 }

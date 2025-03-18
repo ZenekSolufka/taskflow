@@ -1,5 +1,6 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../custom-datepicker.css";
 
 const AddTask = ({
   eventName,
@@ -19,14 +20,15 @@ const AddTask = ({
     <form className="task-form">
       <div className="space-y-4">
         <div>
-          <label className="block text-sm text-gray-100 font-medium mb-1">
+          <label className="block text-sm text-[#EEEEEE] font-medium mb-1">
             Task Name
           </label>
           <input
+            placeholder="Enter task name"
             type="text"
             value={eventName}
             onChange={(e) => setEventName(e.target.value)}
-            className="w-full p-2 border border-[#242424] rounded-lg bg-[#1b1b1b]"
+            className="w-full p-2 border border-[#00ADB5] rounded-lg bg-[#EEEEEE] text-black"
           />
         </div>
         <div>
@@ -34,9 +36,10 @@ const AddTask = ({
             Description
           </label>
           <input
+            placeholder="Enter task description"
             value={eventDescription}
             onChange={(e) => setEventDescription(e.target.value)}
-            className="w-full p-2 border border-[#242424] rounded-lg bg-[#1b1b1b]"
+            className="w-full p-2 border border-[#00ADB5] rounded-lg bg-[#EEEEEE] text-black"
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -51,7 +54,8 @@ const AddTask = ({
               timeFormat="HH:mm"
               timeIntervals={15}
               dateFormat="yyyy-MM-dd HH:mm"
-              className="w-full p-2 border rounded-lg bg-[#1b1b1b] border-[#242424] text-gray-100"
+              className="w-full p-2 border rounded-lg bg-[#EEEEEE] border-[#00ADB5] text-black"
+              popperClassName="custom-datepicker-popup"
             />
           </div>
           <div>
@@ -65,7 +69,7 @@ const AddTask = ({
               timeFormat="HH:mm"
               timeIntervals={15}
               dateFormat="yyyy-MM-dd HH:mm"
-              className="w-full p-2 border rounded-lg bg-[#1b1b1b] border-[#242424] text-gray-100"
+              className="w-full p-2 border rounded-lg bg-[#EEEEEE] border-[#00ADB5] text-black"
             />
           </div>
         </div>
