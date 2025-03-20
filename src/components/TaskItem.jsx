@@ -1,8 +1,18 @@
 import { format } from "date-fns";
 
-const TaskItem = ({ task, removeTask }) => {
+const TaskItem = ({ task, removeTask, onComplete }) => {
+  const handleClick = (e) => {
+    e.stopPropagation(); // Zapobiega konfliktom z innymi handlerami
+    onComplete(task.id);
+  };
+
   return (
-    <div className=" bg-[#222831] px-4 py-4 rounded-xl mb-4 mr-4 flex justify-between items-center">
+    <div
+      onClick={handleClick}
+      className={`bg-[#222831] px-4 py-4 rounded-xl mb-4 mr-4 flex justify-between items-center ${
+        task.completed ? "opacity-50 grayscale" : ""
+      }`}
+    >
       <div className="flex flex-col  ">
         <p className=" text-gray-100 text-xl">{task.eventName}</p>
         <p className=" text-gray-100">{task.eventDescription}</p>

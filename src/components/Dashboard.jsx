@@ -6,6 +6,7 @@ import TaskList from "./TaskList";
 import Chart from "./Chart";
 import HomePage from "./HomePage";
 import CalendarView from "./CalendarView";
+import UserProfile from "./UserProfile";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import {
   Chart as ChartJS,
@@ -29,13 +30,29 @@ const Dashboard = ({ session }) => {
       const parsedTasks = JSON.parse(savedTasks);
       return parsedTasks.map((task) => ({
         ...task,
-        start: new Date(task.start), // Konwersja stringa na Date
+        start: new Date(task.start),
         end: new Date(task.end),
       }));
     } else {
       return [];
     }
   });
+  const [completedTasksCount, setCompletedTasksCount] = useState(0);
+
+  const handleTaskComplete = (taskId) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === taskId) {
+          const newCompleted = !task.completed;
+          setCompletedTasksCount((prev) =>
+            newCompleted ? prev + 1 : prev - 1
+          );
+          return { ...task, completed: newCompleted };
+        }
+        return task;
+      })
+    );
+  };
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -116,50 +133,59 @@ const Dashboard = ({ session }) => {
   };
   console.log(session);
   console.log("dane tasków", tasks);
+  console.log(completedTasksCount);
 
   return (
-    <div className="flex items-center justify-center h-[100vh]">
+    <div className="flex items-center justify-center ">
       <main className="max-w-7xl mx-auto px-4 py-8">
         {session ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column */}
-            <div className="lg:col-span-2 space-y-15">
-              <div className="bg-[#393E46] p-6 rounded-lg shadow-sm">
-                <h2 className="text-lg font-semibold mb-4 text-gray-100">
-                  Create New Task
-                </h2>
-                <AddTask
-                  eventName={eventName}
-                  setEventName={setEventName}
-                  eventDescription={eventDescription}
-                  setEventDescription={setEventDescription}
-                  start={start}
-                  setStart={setStart}
-                  end={end}
-                  setEnd={setEnd}
-                  addTask={addTask}
+          <div className="space-y-8">
+            <UserProfile
+              session={session}
+              tasks={tasks}
+              completedTasksCount={completedTasksCount}
+            />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Left Column */}
+              <div className="lg:col-span-2 space-y-15">
+                <div className="bg-[#393E46] p-6 rounded-lg shadow-sm">
+                  <h2 className="text-lg font-semibold mb-4 text-gray-100">
+                    Create New Task
+                  </h2>
+                  <AddTask
+                    eventName={eventName}
+                    setEventName={setEventName}
+                    eventDescription={eventDescription}
+                    setEventDescription={setEventDescription}
+                    start={start}
+                    setStart={setStart}
+                    end={end}
+                    setEnd={setEnd}
+                    addTask={addTask}
+                    toggleTask={toggleTask}
+                    removeTask={removeTask}
+                  />
+                  <button
+                    onClick={createCalendarEvent}
+                    className="w-full bg-[#00ADB5] text-white py-2 rounded-lg mt-4"
+                  >
+                    Add to Google Calendar
+                  </button>
+                </div>
+                <TaskList
+                  tasks={tasks}
                   toggleTask={toggleTask}
                   removeTask={removeTask}
+                  start={start}
+                  end={end}
+                  onComplete={handleTaskComplete}
                 />
-                <button
-                  onClick={createCalendarEvent}
-                  className="w-full bg-[#00ADB5] text-white py-2 rounded-lg mt-4"
-                >
-                  Add to Google Calendar
-                </button>
               </div>
-              <TaskList
-                tasks={tasks}
-                toggleTask={toggleTask}
-                removeTask={removeTask}
-                start={start}
-                end={end}
-              />
-            </div>
-            {/* Right Column */}
-            <div className="flex flex-col justify-between">
-              <Chart tasks={tasks} />
-              <CalendarView tasks={tasks} />
+              {/* Right Column */}
+              <div className="flex flex-col justify-between">
+                <Chart tasks={tasks} />
+                <CalendarView tasks={tasks} />
+              </div>
             </div>
           </div>
         ) : (

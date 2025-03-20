@@ -3,7 +3,7 @@ import SignIn from "./SignIn";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-[#222831] text-[#EEEEEE] font-sans">
+    <div className="h-full bg-[#222831] text-[#EEEEEE] font-sans">
       <section className="py-20 px-4">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 mb-10 md:mb-0">
@@ -18,6 +18,13 @@ const HomePage = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <SignIn />
             </div>
+          </div>
+          <div className="w-[50%]">
+            <img
+              className="w-full border-1 border-[#00ADB5] rounded-lg shadow-lg"
+              src="../assets/taskflowpreview.jpg"
+              alt="preview"
+            />
           </div>
         </div>
       </section>

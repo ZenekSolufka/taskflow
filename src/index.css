@@ -23,13 +23,18 @@
   }
 }
 
-/*
-
 .rbc-month-view {
-  color: white;
-  background-color: #1b1b1b;
+  border: none !important;
 }
 
+.rbc-month-row + .rbc-month-row {
+  border: none !important;
+}
+
+.rbc-header {
+  border: none !important;
+}
+/*
 .rbc-off-range-bg {
   background-color: red !important; 
 }
@@ -81,12 +86,22 @@
 .rbc-row {
   color: #fff !important;
 }
+
+.rbc-row-content {
+  justify-content: center !important;
+}
+
+.rbc-row-bg {
+  gap: 5px !important;
+}
 .rbc-button-link {
   color: #fff !important;
 }
 
 .rbc-event {
   background-color: #222831 !important;
+  width: 90% !important;
+  margin-left: 3px !important;
 }
 
 .rbc-month-row {
@@ -95,4 +110,13 @@
 
 .rbc-calendar {
   height: 410px !important;
+}
+
+.rbc-day-bg {
+  border: none !important;
+  border-radius: 5px !important;
+}
+
+.rbc-button-link {
+  padding-right: 10px !important;
 }

@@ -1,5 +1,12 @@
 import TaskItem from "./TaskItem";
-const TaskList = ({ tasks, toggleTask, removeTask, start, end }) => {
+const TaskList = ({
+  tasks,
+  toggleTask,
+  removeTask,
+  start,
+  end,
+  onComplete,
+}) => {
   return (
     <div className="bg-[#393E46] py-6 pl-6 rounded-lg shadow-sm pr-[5px]">
       <h2 className="text-lg font-semibold mb-4 text-gray-100">Tasks List</h2>
@@ -15,6 +22,7 @@ const TaskList = ({ tasks, toggleTask, removeTask, start, end }) => {
               task={task}
               start={start}
               end={end}
+              onComplete={onComplete}
             />
           ))
         )}
